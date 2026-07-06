@@ -24,10 +24,10 @@ Plan completo en `tasks/plan.md`. Implementar con `/g-build` (un task por vez, e
 - [x] **RT1** · Modelo de datos de la Mesa (`Piece`, `StepInteraction`, `ProcessStep`+, `AssemblyScene`) + tests · _S_ ✅
 - [x] **RT2** · Reescribir contenido del Fuego (8 pasos + piezas + fix rigor piedra=cojinete) + tests · _M_ ✅
 - [x] **RT3** · Extender el motor para pasos de ensamblaje (place correcto / gesto con umbral) + tests · _M_ ✅
-- [ ] **RT4** · Componente `<Mesa>` genérico (bandeja + slots + drag + panel de pasos) · _M/L_ ⏳
-- [ ] **RT5** · Gestos animados en SVG (fricción + soplar) · _M_
-- [ ] **RT6** · Assets SVG de las piezas del Fuego (portar del prototipo) · _M_
-- [ ] **RT7** · Integrar store + quitar React Flow · _S/M_
+- [x] **RT4** · Componente `<Mesa>` genérico (bandeja + slots + drag + panel de pasos) · _M/L_ ✅
+- [x] **RT5** · Gestos IN-SITU en la escena (friccionar arrastrando, soplar, enrollar) + animación · _M_ ✅
+- [x] **RT6** · Assets SVG de las piezas del Fuego (escena + thumbnails, del prototipo) · _M_ ✅
+- [ ] **RT7** · Integrar store + quitar React Flow · _S/M_ ⏳
 - [ ] ✅ **Checkpoint Mesa jugable** — armar el taladro y encender el fuego en la Mesa, end-to-end
 
 ## Phase 3 — Ciencia, misión y pulido

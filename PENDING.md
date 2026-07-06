@@ -23,6 +23,7 @@
   - **Íconos → SVG:** reemplazar los emojis (placeholder) por **SVG**. Fuente recomendada: [game-icons.net](https://game-icons.net) (+4000 íconos estilo juego, CC-BY 3.0, monocromáticos → coloreables para dar identidad). Agregar campo `icon?` al `Element` con fallback a emoji. *Motivo:* los emojis son inconsistentes entre sistemas, genéricos y limitados (no hay para taladro de arco, cal, salitre…).
   - **Light mode → toggle:** hoy forzamos light (variante `dark:` neutralizada pero las clases siguen en el código). Cuando se quiera, reactivar un toggle claro/oscuro es trivial.
   - **Animaciones de acciones (juice + humor):** al ejecutar una acción, animarla visualmente (soplar, torcer, friccionar, tallar *sobre* el material). Las que no aplican, con humor (torcer una piedra 😄). El motor ya distingue éxito / no-aplica / falla → es enganchar la animación al resultado. Va junto con los assets visuales.
+  - **Pulir la Mesa de Trabajo (jul 2026):** ya existe y es jugable con arte "funcional" portado del prototipo (piezas SVG dibujadas, gestos in-situ animados). La sesión de diseño la lleva al siguiente nivel: proporciones, texturas, paleta e identidad *Dr. Stone*. El usuario: *"se ve mejor, pero creo que diseño lo hará mucho mejor"*. Archivos: `src/components/mesa/`.
 
 ## 📦 Scope diferido (confirmado fuera del MVP actual)
 
