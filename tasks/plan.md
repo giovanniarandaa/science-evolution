@@ -26,8 +26,8 @@
 | RT4 | Componente `<Mesa>` genérico (bandeja + slots + drag + panel de pasos) — portar prototipo a React/TS | ✅ |
 | RT5 | Gestos IN-SITU en la escena (friccionar arrastrando, soplar, enrollar) + animación | ✅ |
 | RT6 | Assets SVG de las piezas del Fuego (escena + thumbnails) | ✅ |
-| RT7 | Integrar store + quitar React Flow | ⏳ próximo |
-| RT8 | Panel científico por paso + zoom molecular | |
+| RT7 | Integrar store + quitar React Flow | ✅ |
+| RT8 | Panel científico por paso + zoom molecular | ⏳ próximo |
 | RT9 | E2E Playwright del ensamblaje | |
 | RT10 | Deploy Vercel (preview) | |
 

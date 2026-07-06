@@ -27,8 +27,8 @@ Plan completo en `tasks/plan.md`. Implementar con `/g-build` (un task por vez, e
 - [x] **RT4** · Componente `<Mesa>` genérico (bandeja + slots + drag + panel de pasos) · _M/L_ ✅
 - [x] **RT5** · Gestos IN-SITU en la escena (friccionar arrastrando, soplar, enrollar) + animación · _M_ ✅
 - [x] **RT6** · Assets SVG de las piezas del Fuego (escena + thumbnails, del prototipo) · _M_ ✅
-- [ ] **RT7** · Integrar store + quitar React Flow · _S/M_ ⏳
-- [ ] ✅ **Checkpoint Mesa jugable** — armar el taladro y encender el fuego en la Mesa, end-to-end
+- [x] **RT7** · Integrar store + quitar React Flow · _S/M_ ✅
+- [x] ✅ **Checkpoint Mesa jugable** — armar el taladro y encender el fuego en la Mesa, end-to-end ✅
 
 ## Phase 3 — Ciencia, misión y pulido
 - [ ] **RT8** · Panel científico por paso + zoom molecular · _M_
