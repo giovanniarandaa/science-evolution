@@ -14,6 +14,7 @@ import { elementsById } from "@/content";
 import { useGameStore } from "@/game/store";
 import { initAssembly, makeAssemblyReducer } from "./assembly-reducer";
 import { PieceThumb } from "./PieceThumb";
+import { SciencePanel } from "./SciencePanel";
 import { TaladroArcoScene, type SceneProps } from "./scenes/TaladroArcoScene";
 
 /** Escenas por-invento (el arte es específico); la Mesa genérica elige por id. */
@@ -90,6 +91,7 @@ export function Mesa({ process }: { process: Process }) {
   // --- drag de piezas (pasos 'place') ---
   const ghostRef = useRef<HTMLDivElement>(null);
   const [drag, setDrag] = useState<{ piece: string; x: number; y: number } | null>(null);
+  const [sciFor, setSciFor] = useState<string | null>(null); // id del Element cuya ciencia mostrar
 
   const startDrag = (e: ReactPointerEvent, pieceId: string) => {
     if (pieceId !== activePlacePiece) return;
@@ -304,13 +306,22 @@ export function Mesa({ process }: { process: Process }) {
               </div>
             )}
             {state.done ? (
-              <button
-                type="button"
-                onClick={() => dispatch({ type: "reset" })}
-                className="pointer-events-auto rounded-full bg-stone-800 px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-stone-700"
-              >
-                ↺ Armar de nuevo
-              </button>
+              <div className="pointer-events-auto flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setSciFor(process.produces)}
+                  className="rounded-full bg-lime-600 px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-lime-500"
+                >
+                  🔬 La ciencia detrás
+                </button>
+                <button
+                  type="button"
+                  onClick={() => dispatch({ type: "reset" })}
+                  className="rounded-full bg-stone-800 px-4 py-2 text-sm font-semibold text-white shadow-lg hover:bg-stone-700"
+                >
+                  ↺ Armar de nuevo
+                </button>
+              </div>
             ) : !isGesture ? (
               <div className="pointer-events-auto rounded-full border border-black/10 bg-white/90 px-4 py-2 text-sm text-stone-600 shadow backdrop-blur">
                 {activeStep?.instruction ?? "Arrastrá la pieza al lugar resaltado"}
@@ -324,26 +335,38 @@ export function Mesa({ process }: { process: Process }) {
           {process.pieces?.map((p) => {
             const used = pieceUsed(p.id);
             const active = p.id === activePlacePiece;
+            const from = p.fromElement ? elementsById[p.fromElement] : undefined;
             return (
-              <button
-                key={p.id}
-                type="button"
-                aria-label={p.name}
-                onPointerDown={(e) => startDrag(e, p.id)}
-                disabled={!active}
-                className={`flex w-20 touch-none flex-col items-center gap-1 rounded-xl border p-2 transition ${
-                  active
-                    ? "cursor-grab border-lime-500 bg-lime-50 shadow ring-2 ring-lime-300"
-                    : used
-                      ? "border-stone-200 bg-stone-100 opacity-30"
-                      : "border-stone-200 bg-stone-50 opacity-50"
-                }`}
-              >
-                <span className="flex h-9 w-9 items-center justify-center">
-                  <PieceThumb pieceId={p.id} fallback={emojiOf(p.id)} />
-                </span>
-                <span className="text-[10px] font-medium text-stone-600">{p.name}</span>
-              </button>
+              <div key={p.id} className="relative">
+                <button
+                  type="button"
+                  aria-label={p.name}
+                  onPointerDown={(e) => startDrag(e, p.id)}
+                  disabled={!active}
+                  className={`flex w-20 touch-none flex-col items-center gap-1 rounded-xl border p-2 transition ${
+                    active
+                      ? "cursor-grab border-lime-500 bg-lime-50 shadow ring-2 ring-lime-300"
+                      : used
+                        ? "border-stone-200 bg-stone-100 opacity-30"
+                        : "border-stone-200 bg-stone-50 opacity-50"
+                  }`}
+                >
+                  <span className="flex h-9 w-9 items-center justify-center">
+                    <PieceThumb pieceId={p.id} fallback={emojiOf(p.id)} />
+                  </span>
+                  <span className="text-[10px] font-medium text-stone-600">{p.name}</span>
+                </button>
+                {from?.science && (
+                  <button
+                    type="button"
+                    aria-label={`¿Qué es ${p.name}?`}
+                    onClick={() => setSciFor(from.id)}
+                    className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full border border-stone-300 bg-white text-[11px] font-bold text-stone-500 shadow hover:bg-lime-50 hover:text-lime-700"
+                  >
+                    ?
+                  </button>
+                )}
+              </div>
             );
           })}
         </div>
@@ -397,6 +420,11 @@ export function Mesa({ process }: { process: Process }) {
         >
           <PieceThumb pieceId={drag.piece} fallback={emojiOf(drag.piece)} className="h-8 w-8" />
         </div>
+      )}
+
+      {/* panel científico (no-modal): "¿qué es esto?" + zoom molecular */}
+      {sciFor && elementsById[sciFor] && (
+        <SciencePanel element={elementsById[sciFor]} onClose={() => setSciFor(null)} />
       )}
       </div>
     </div>
