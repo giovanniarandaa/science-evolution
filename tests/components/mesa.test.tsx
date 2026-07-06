@@ -17,11 +17,13 @@ describe("<Mesa>", () => {
     expect(screen.getAllByText(/tallá la tabla de fuego/i).length).toBeGreaterThan(0);
   });
 
-  it("ofrece las piezas en la bandeja (arrastrables)", () => {
+  it("arranca en la fase de fabricación, con los materiales en la bandeja", () => {
     render(<Mesa process={procesoFuego} />);
-    for (const p of procesoFuego.pieces ?? []) {
-      expect(screen.getByRole("button", { name: p.name })).toBeInTheDocument();
-    }
+    // materiales (no piezas ya hechas): madera, fibra, piedra. Nombre exacto para no
+    // chocar con el botón "?" (¿Qué es …?).
+    expect(screen.getByRole("button", { name: /^rama seca$/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^fibra vegetal$/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /^piedra$/i })).toBeInTheDocument();
   });
 
   it("lista los pasos del ensamblaje en el panel", () => {
