@@ -28,8 +28,8 @@
 | RT6 | Assets SVG de las piezas del Fuego (escena + thumbnails) | ✅ |
 | RT7 | Integrar store + quitar React Flow | ✅ |
 | RT8 | Panel científico + zoom molecular | ✅ |
-| RC1 | Tipos: interacción `craft` + gestos tallar/picar + `Piece.science` | ⏳ próximo |
-| RC2 | Contenido: fuego con fabricación de piezas (compuestos con ciencia) | |
+| RC1 | Tipos: interacción `craft` + gestos tallar/picar + `Piece.science` | ✅ |
+| RC2 | Contenido: fuego con fabricación de piezas (compuestos con ciencia) | ⏳ próximo |
 | RC3 | Motor + reducer: resolver `craft` + estado de piezas fabricadas | |
 | RC4 | Mesa: fase de fabricación + panel "?" con relación pieza↔material | |
 | RT9 | E2E Playwright del ensamblaje | |
