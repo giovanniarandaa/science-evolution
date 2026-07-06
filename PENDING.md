@@ -18,6 +18,7 @@
 
 ## 🔧 Decisiones a revisitar
 
+- **⭐ Rediseñar la UX de acciones (feedback del usuario, IMPORTANTE):** la interacción actual —seleccionar nodos + barra de botones (Torcer/Tallar/Friccionar/Soplar)— **NO convence**: *"me lo imaginaba diferente"*. Explorar alternativas antes de escalar contenido: arrastrar un nodo sobre otro (estilo Little Alchemy), conectar nodos con aristas hacia un nodo-acción (n8n puro), menú contextual al soltar, o que las acciones emerjan del propio material. Es la **interacción central del juego** → merece su propia exploración de diseño.
 - **UX de friccionar:** MVP usa "mantener presionado con barra de progreso". Revisar si hay una interacción más satisfactoria (ritmo, arrastre) cuando lo probemos.
 - **Canvas libre vs guiado:** arrancamos libre estilo n8n con snapping. Revisar si abruma.
 - **Gestor de paquetes:** pnpm elegido. (bun quedó descartado por edge cases con el dev server de Next.)
