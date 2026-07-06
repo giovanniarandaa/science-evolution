@@ -28,9 +28,35 @@ describe("integridad del contenido", () => {
     const ids = elements.map((e) => e.id);
     expect(new Set(ids).size).toBe(ids.length);
   });
+
+  // --- RT2: integridad del modelo de la Mesa de Trabajo ---
+  it("cada paso 'place' referencia una pieza y un slot declarados", () => {
+    for (const p of processes) {
+      const pieceIds = new Set((p.pieces ?? []).map((pc) => pc.id));
+      const slotIds = new Set(Object.keys(p.scene?.slots ?? {}));
+      for (const step of p.steps) {
+        const inter = step.interaction;
+        if (inter?.type === "place") {
+          expect(pieceIds.has(inter.piece), `${p.id}/${step.id} pieza: ${inter.piece}`).toBe(true);
+          expect(slotIds.has(inter.slot), `${p.id}/${step.id} slot: ${inter.slot}`).toBe(true);
+        }
+      }
+    }
+  });
+
+  it("cada pieza con fromElement referencia un Element existente", () => {
+    const ids = new Set(elements.map((e) => e.id));
+    for (const p of processes) {
+      for (const pc of p.pieces ?? []) {
+        if (pc.fromElement) {
+          expect(ids.has(pc.fromElement), `pieza ${pc.id} fromElement: ${pc.fromElement}`).toBe(true);
+        }
+      }
+    }
+  });
 });
 
-describe("contenido: el Fuego", () => {
+describe("contenido: el Fuego (Mesa de Trabajo)", () => {
   const fuego = processesById["fuego"];
 
   it("es un elemento llave que desbloquea cerámica y cal", () => {
@@ -38,17 +64,42 @@ describe("contenido: el Fuego", () => {
     expect(fuego.unlocks).toEqual(expect.arrayContaining(["ceramica", "cal"]));
   });
 
-  it("el elemento fuego expone su temperatura", () => {
-    expect(elementsById["fuego"].props?.temperatura).toBeGreaterThan(0);
+  it("se arma en ~8 pasos, cada uno con instrucción e interacción de la Mesa", () => {
+    expect(fuego.steps.length).toBeGreaterThanOrEqual(7);
+    expect(fuego.steps.length).toBeLessThanOrEqual(10);
+    for (const s of fuego.steps) {
+      expect(s.instruction, `paso ${s.id} sin instrucción`).toBeTruthy();
+      expect(s.interaction, `paso ${s.id} sin interacción`).toBeDefined();
+    }
+  });
+
+  it("declara sus piezas físicas y la escena de ensamblaje", () => {
+    const pieceIds = (fuego.pieces ?? []).map((p) => p.id);
+    expect(pieceIds).toEqual(
+      expect.arrayContaining(["tabla_fuego", "husillo", "arco", "cojinete_piedra"]),
+    );
+    expect(Object.keys(fuego.scene?.slots ?? {}).length).toBeGreaterThan(0);
+  });
+
+  it("RIGOR: la piedra es el cojinete y NO se consume en ningún paso", () => {
+    for (const s of fuego.steps) {
+      expect(s.consumes ?? [], `el paso ${s.id} no debe consumir piedra`).not.toContain("piedra");
+    }
+    const cojinete = (fuego.pieces ?? []).find((p) => p.fromElement === "piedra");
+    expect(cojinete, "falta la pieza cojinete derivada de la piedra").toBeDefined();
   });
 
   it("tiene ciencia con fuentes citadas (rigor)", () => {
     expect(fuego.science.sources?.length ?? 0).toBeGreaterThan(0);
   });
 
+  it("el elemento fuego expone su temperatura", () => {
+    expect(elementsById["fuego"].props?.temperatura).toBeGreaterThan(0);
+  });
+
   it("el motor lo resuelve con éxito y produce fuego", () => {
     const r = runProcess(fuego, {
-      tallar: { sequedad: 1 },
+      colocar_tabla: { sequedad: 1 },
       friccionar: { friccion: 1 },
       soplar: { oxigeno: 1 },
     });
@@ -58,7 +109,7 @@ describe("contenido: el Fuego", () => {
 
   it("falla en friccionar si no hay suficiente fricción, con el hint correcto", () => {
     const r = runProcess(fuego, {
-      tallar: { sequedad: 1 },
+      colocar_tabla: { sequedad: 1 },
       friccionar: { friccion: 0.2 },
       soplar: { oxigeno: 1 },
     });
@@ -69,7 +120,7 @@ describe("contenido: el Fuego", () => {
 
   it("falla en soplar si no se aporta oxígeno (triángulo del fuego)", () => {
     const r = runProcess(fuego, {
-      tallar: { sequedad: 1 },
+      colocar_tabla: { sequedad: 1 },
       friccionar: { friccion: 1 },
       soplar: {},
     });

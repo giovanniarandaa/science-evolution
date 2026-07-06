@@ -84,10 +84,10 @@ const brasa: Element = {
   tags: ["caliente", "ignicion"],
   science: {
     whatIsIt: "Polvo de madera incandescente: el germen del fuego.",
-    composition: "Celulosa parcialmente descompuesta a >280 °C que brilla sin llama.",
+    composition: "Celulosa descompuesta por fricción que, a ~400 °C, se enciende y brilla sin llama.",
     funFact: "Una brasa protegida y bien aireada se convierte en llama.",
   },
-  props: { temperatura: 300 },
+  props: { temperatura: 400 },
 };
 
 const fuego: Element = {

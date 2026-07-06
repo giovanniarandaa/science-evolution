@@ -24,6 +24,7 @@ export type GestureType =
   | "friccionar"
   | "soplar"
   | "torcer"
+  | "enrollar"
   | "amasar"
   | "moler";
 

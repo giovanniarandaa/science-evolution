@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { useGameStore } from "@/game/store";
 
 const WIN = {
-  tallar: { sequedad: 1 },
+  colocar_tabla: { sequedad: 1 },
   friccionar: { friccion: 1 },
   soplar: { oxigeno: 1 },
 };
