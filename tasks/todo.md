@@ -5,7 +5,7 @@ Plan completo en `tasks/plan.md`. Implementar con `/g-build` (un task por vez, e
 ## Phase 1 — Foundation (lógica testeable sin UI)
 - [x] **T1** · Scaffold Next.js + TS + Tailwind + React Flow + Zustand + Vitest/Playwright · _M_ ✅ `bdbb954`
 - [x] **T2** · Tipos del dominio (`src/game/types`) · _S_ ✅ `716d41b`
-- [ ] **T3** · Motor de procesos genérico (`src/game/engine`) + tests · _M_
+- [x] **T3** · Motor de procesos genérico (`src/game/engine`) + tests · _M_ ✅ `f982841`
 - [ ] **T4** · Contenido del Fuego (`src/content`) + test de integridad · _M_
 - [ ] **T5** · Store Zustand + persist a localStorage + tests · _M_
 - [ ] ✅ **Checkpoint Foundation** — tests/typecheck/build en verde; flujo lógico del Fuego OK; review
