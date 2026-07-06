@@ -21,8 +21,8 @@
 | # | Task | Estado |
 |---|------|--------|
 | RT1 | Modelo de datos de la Mesa (`Piece`, `StepInteraction`, `ProcessStep`+, `AssemblyScene`) + tests | ✅ |
-| RT2 | Reescribir contenido del Fuego (~8 pasos + piezas + fix rigor piedra=cojinete) + tests | ⏳ próximo |
-| RT3 | Extender el motor para pasos de ensamblaje (place correcto / gesto con umbral) + tests | |
+| RT2 | Reescribir contenido del Fuego (8 pasos + piezas + fix rigor piedra=cojinete) + tests | ✅ |
+| RT3 | Extender el motor para pasos de ensamblaje (place correcto / gesto con umbral) + tests | ⏳ próximo |
 | RT4 | Componente `<Mesa>` genérico (bandeja + slots + drag + panel de pasos) — portar prototipo a React/TS | |
 | RT5 | Gestos animados en SVG (fricción + soplar) | |
 | RT6 | Assets SVG de las piezas del Fuego (portar del prototipo) | |
