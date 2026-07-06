@@ -136,6 +136,7 @@ Un slice temático completo y jugable de principio a fin, con foco en **profundi
 - **Sandbox Simulado:** partículas reales tipo Powder Toy (muy ambicioso).
 - **Simular ser una máquina:** construir CPU / monitor / electrónica como su propia simulación de proceso, capa por capa (la estrella polar del rigor).
 - Logros, enciclopedia que se completa, compartir tu grafo/reino.
+- **Animaciones de acciones (juice + humor):** cada acción se *ve* — soplás, torcés, friccionás o tallás sobre el material. Las que NO aplican son graciosas (torcer una piedra, soplarle a una roca 😄): el humor enseña qué no funciona. Refuerza "el proceso ES el juego". *(El motor ya distingue éxito / no-aplica / falla, así que es enganchar animación al resultado.)*
 
 ---
 
