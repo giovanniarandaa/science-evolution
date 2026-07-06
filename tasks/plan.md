@@ -33,7 +33,9 @@
 | RC3 | Motor + reducer: resolver `craft` + estado de piezas fabricadas | ✅ |
 | RC4 | Mesa: fase de fabricación + panel "?" con relación pieza↔material | ✅ |
 | RT9 | E2E Playwright del ensamblaje | ✅ |
-| RT10 | Deploy Vercel (preview) | ⏳ próximo |
+| RT10 | Deploy Vercel (CI/CD desde `main`) | ✅ |
+
+**🎉 SLICE DEL FUEGO COMPLETO (jul 2026):** jugable de 0 a 🔥 (fabricar → ensamblar → usar) con ciencia, 73 unit + 2 E2E verdes, desplegado en Vercel. Rama `main` en GitHub con CI/CD.
 
 **Fase R2 (fabricación de piezas):** paso atrás por rigor — las piezas son compuestos que se fabrican desde materiales, no aparecen hechas. Ver `todo.md` §Fase R2.
 

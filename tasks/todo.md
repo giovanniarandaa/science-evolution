@@ -43,5 +43,5 @@ Plan completo en `tasks/plan.md`. Implementar con `/g-build` (un task por vez, e
 
 ## Phase 4 — Verificación y deploy
 - [x] **RT9** · Tests E2E Playwright (happy path 13 pasos + panel científico) · _S/M_ ✅ (fallas cubiertas por unit tests: la UI guiada no deja acciones inválidas)
-- [ ] **RT10** · Deploy a Vercel (preview) · _S_ ⏳
-- [ ] ✅ **Checkpoint Complete** — todo cumplido; E2E verde; preview desplegado
+- [x] **RT10** · Deploy a Vercel (CI/CD desde `main`) · _S_ ✅
+- [x] ✅ **Checkpoint Complete** — Fuego jugable de 0 a 🔥; 73 unit + 2 E2E verdes; desplegado en Vercel ✅🎉
