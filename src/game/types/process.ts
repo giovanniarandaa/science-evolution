@@ -1,4 +1,5 @@
 import type { ScienceInfo } from "./science";
+import type { Piece, StepInteraction, AssemblyScene } from "./assembly";
 
 /** Era del árbol tecnológico. Se irá extendiendo (bronce, hierro, …). */
 export type Era = "piedra";
@@ -36,6 +37,12 @@ export interface ProcessStep {
   action: string;
   /** Descripción de qué hace el jugador en este paso. */
   description: string;
+  /** Instrucción imperativa para el panel de la Mesa. Ej: "Colocá la tabla de fuego". */
+  instruction?: string;
+  /** Nota científica breve del paso (el "por qué"), mostrada al estar activo. */
+  note?: string;
+  /** Cómo se interactúa en este paso dentro de la Mesa de Trabajo (colocar pieza / gesto). */
+  interaction?: StepInteraction;
   /** Elementos que consume este paso. */
   consumes?: string[];
   /** Elemento intermedio o final que produce. Ej: "brasa". */
@@ -79,6 +86,10 @@ export interface Process {
   unlocks?: string[];
   /** Los pasos reales del procedimiento, en orden. */
   steps: ProcessStep[];
+  /** Piezas físicas que se ensamblan en la Mesa de Trabajo. */
+  pieces?: Piece[];
+  /** Layout visual del ensamblaje en la Mesa (slots posicionados). */
+  scene?: AssemblyScene;
   /** Explicación científica del invento. */
   science: ScienceInfo;
   /** Misión asociada, si la hay. */
