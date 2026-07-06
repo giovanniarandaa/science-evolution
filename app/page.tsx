@@ -1,5 +1,6 @@
-import { GameCanvas } from "@/components/canvas/GameCanvas";
+import { Mesa } from "@/components/mesa/Mesa";
+import { procesoFuego } from "@/content/processes/fuego";
 
 export default function Home() {
-  return <GameCanvas />;
+  return <Mesa process={procesoFuego} />;
 }
