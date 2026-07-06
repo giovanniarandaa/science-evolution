@@ -16,9 +16,10 @@ describe("game store", () => {
   it("arranca con la materia prima base descubierta y sin progreso", () => {
     const s = useGameStore.getState();
     expect(s.discovered).toEqual(
-      expect.arrayContaining(["rama_seca", "fibra_seca", "cuerda", "piedra"]),
+      expect.arrayContaining(["rama_seca", "fibra_seca", "fibra_vegetal", "piedra"]),
     );
     expect(s.discovered).not.toContain("fuego");
+    expect(s.discovered).not.toContain("cuerda"); // la cuerda se fabrica (cordelería)
     expect(s.completedProcesses).toHaveLength(0);
   });
 

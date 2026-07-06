@@ -1,5 +1,6 @@
 import type { Element } from "@/game/types";
 import { celulosa, cienciaFuego } from "@/content/science/combustion";
+import { cienciaCuerda } from "@/content/science/cordeleria";
 
 /** Elementos de la Edad de Piedra necesarios para el invento del Fuego. */
 
@@ -28,16 +29,26 @@ const fibraSeca: Element = {
   },
 };
 
+const fibraVegetal: Element = {
+  id: "fibra_vegetal",
+  name: "Fibra vegetal",
+  emoji: "🌿",
+  kind: "material",
+  tags: ["fibra", "planta"],
+  science: {
+    whatIsIt: "Fibras largas y resistentes de plantas (corteza interna, ortiga, agave).",
+    composition:
+      "Haces de celulosa alargados; resisten la tensión, ideales para torcer cuerda.",
+  },
+};
+
 const cuerda: Element = {
   id: "cuerda",
   name: "Cuerda vegetal",
   emoji: "🪢",
-  kind: "material",
-  tags: ["fibra"],
-  science: {
-    whatIsIt: "Fibras torcidas que forman una cuerda resistente.",
-    composition: "Fibras vegetales trenzadas; tensan el arco del taladro.",
-  },
+  kind: "producto",
+  tags: ["fibra", "fabricado"],
+  science: cienciaCuerda,
 };
 
 const piedra: Element = {
@@ -95,6 +106,7 @@ const fuego: Element = {
 export const edadPiedraElements: Element[] = [
   ramaSeca,
   fibraSeca,
+  fibraVegetal,
   cuerda,
   piedra,
   taladroArco,

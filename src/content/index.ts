@@ -1,10 +1,11 @@
 import type { Element, Process } from "@/game/types";
 import { edadPiedraElements } from "./elements/edad-piedra";
+import { procesoCordeleria } from "./processes/cordeleria";
 import { procesoFuego } from "./processes/fuego";
 
 /** Catálogo de todo el contenido del juego (el "árbol de la ciencia"). */
 export const elements: Element[] = [...edadPiedraElements];
-export const processes: Process[] = [procesoFuego];
+export const processes: Process[] = [procesoCordeleria, procesoFuego];
 
 /** Índices por id para lookup rápido desde el motor, el store y la UI. */
 export const elementsById: Record<string, Element> = Object.fromEntries(

@@ -9,7 +9,8 @@ export type ConditionType =
   | "friccion"
   | "oxigeno"
   | "temperatura"
-  | "proporcion";
+  | "proporcion"
+  | "torsion";
 
 /**
  * Una condición física real, modelada como gameplay.
