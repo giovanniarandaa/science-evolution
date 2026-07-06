@@ -5,6 +5,8 @@
 ## 🎨 Sesiones futuras planeadas
 
 - **Arte / dirección visual** — el MVP arranca con estilo funcional limpio. El diseño distintivo (paleta, tipografía, ilustración de nodos, "sabor" Dr. Stone) merece su propia sesión con `frontend-design`. **Agendar después del slice jugable (post-T8).**
+  - **Íconos → SVG:** reemplazar los emojis (placeholder) por **SVG**. Fuente recomendada: [game-icons.net](https://game-icons.net) (+4000 íconos estilo juego, CC-BY 3.0, monocromáticos → coloreables para dar identidad). Agregar campo `icon?` al `Element` con fallback a emoji. *Motivo:* los emojis son inconsistentes entre sistemas, genéricos y limitados (no hay para taladro de arco, cal, salitre…).
+  - **Light mode → toggle:** hoy forzamos light (variante `dark:` neutralizada pero las clases siguen en el código). Cuando se quiera, reactivar un toggle claro/oscuro es trivial.
 
 ## 📦 Scope diferido (confirmado fuera del MVP actual)
 
