@@ -13,8 +13,8 @@ describe("<Mesa>", () => {
   it("muestra la misión de Senku y el primer paso activo", () => {
     render(<Mesa process={procesoFuego} />);
     expect(screen.getByText(procesoFuego.mission!.goal)).toBeInTheDocument();
-    // el primer paso instruye a colocar la tabla (aparece en la guía y en el panel)
-    expect(screen.getAllByText(/colocá la tabla de fuego/i).length).toBeGreaterThan(0);
+    // el primer paso ahora es fabricar: tallar la tabla (aparece en la guía y en el panel)
+    expect(screen.getAllByText(/tallá la tabla de fuego/i).length).toBeGreaterThan(0);
   });
 
   it("ofrece las piezas en la bandeja (arrastrables)", () => {

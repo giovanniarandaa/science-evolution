@@ -29,8 +29,9 @@ describe("integridad del contenido", () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  // --- RT2: integridad del modelo de la Mesa de Trabajo ---
-  it("cada paso 'place' referencia una pieza y un slot declarados", () => {
+  // --- integridad del modelo de la Mesa (fabricar + ensamblar) ---
+  it("cada paso 'craft'/'place' referencia material/pieza/slot declarados", () => {
+    const elemIds = new Set(elements.map((e) => e.id));
     for (const p of processes) {
       const pieceIds = new Set((p.pieces ?? []).map((pc) => pc.id));
       const slotIds = new Set(Object.keys(p.scene?.slots ?? {}));
@@ -39,6 +40,9 @@ describe("integridad del contenido", () => {
         if (inter?.type === "place") {
           expect(pieceIds.has(inter.piece), `${p.id}/${step.id} pieza: ${inter.piece}`).toBe(true);
           expect(slotIds.has(inter.slot), `${p.id}/${step.id} slot: ${inter.slot}`).toBe(true);
+        } else if (inter?.type === "craft") {
+          expect(pieceIds.has(inter.piece), `${p.id}/${step.id} craft pieza: ${inter.piece}`).toBe(true);
+          expect(elemIds.has(inter.material), `${p.id}/${step.id} craft material: ${inter.material}`).toBe(true);
         }
       }
     }
@@ -56,7 +60,7 @@ describe("integridad del contenido", () => {
   });
 });
 
-describe("contenido: el Fuego (Mesa de Trabajo)", () => {
+describe("contenido: el Fuego (fabricar + ensamblar)", () => {
   const fuego = processesById["fuego"];
 
   it("es un elemento llave que desbloquea cerámica y cal", () => {
@@ -64,24 +68,34 @@ describe("contenido: el Fuego (Mesa de Trabajo)", () => {
     expect(fuego.unlocks).toEqual(expect.arrayContaining(["ceramica", "cal"]));
   });
 
-  it("se arma en ~8 pasos, cada uno con instrucción e interacción de la Mesa", () => {
-    expect(fuego.steps.length).toBeGreaterThanOrEqual(7);
-    expect(fuego.steps.length).toBeLessThanOrEqual(10);
+  it("se arma en ~13 pasos (fabricar + ensamblar + usar), con instrucción e interacción", () => {
+    expect(fuego.steps.length).toBeGreaterThanOrEqual(12);
+    expect(fuego.steps.length).toBeLessThanOrEqual(15);
     for (const s of fuego.steps) {
       expect(s.instruction, `paso ${s.id} sin instrucción`).toBeTruthy();
       expect(s.interaction, `paso ${s.id} sin interacción`).toBeDefined();
     }
   });
 
-  it("declara sus piezas físicas y la escena de ensamblaje", () => {
-    const pieceIds = (fuego.pieces ?? []).map((p) => p.id);
-    expect(pieceIds).toEqual(
-      expect.arrayContaining(["tabla_fuego", "husillo", "arco", "cojinete_piedra"]),
+  it("fabrica cada pieza desde un material (nada aparece de la nada)", () => {
+    const craftSteps = fuego.steps.filter((s) => s.interaction?.type === "craft");
+    const pieces = fuego.pieces ?? [];
+    expect(craftSteps.length).toBe(pieces.length);
+    const craftedPieces = new Set(
+      craftSteps.map((s) => (s.interaction?.type === "craft" ? s.interaction.piece : "")),
     );
-    expect(Object.keys(fuego.scene?.slots ?? {}).length).toBeGreaterThan(0);
+    for (const p of pieces) {
+      expect(craftedPieces.has(p.id), `falta fabricar la pieza ${p.id}`).toBe(true);
+    }
   });
 
-  it("RIGOR: la piedra es el cojinete y NO se consume en ningún paso", () => {
+  it("las piezas son compuestos con ciencia propia", () => {
+    for (const p of fuego.pieces ?? []) {
+      expect(p.science?.whatIsIt, `pieza ${p.id} sin ciencia`).toBeTruthy();
+    }
+  });
+
+  it("RIGOR: la piedra se pica para el cojinete y NO se consume en el ensamblaje", () => {
     for (const s of fuego.steps) {
       expect(s.consumes ?? [], `el paso ${s.id} no debe consumir piedra`).not.toContain("piedra");
     }

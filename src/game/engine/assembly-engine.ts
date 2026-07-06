@@ -9,15 +9,17 @@ import { resolveStep, type StepInputs } from "./process-engine";
 
 /** Lo que el jugador hace sobre un paso de la Mesa. */
 export type StepAttempt =
+  | { kind: "craft"; material: string; value?: number }
   | { kind: "place"; piece: string; slot: string }
   | { kind: "gesture"; value?: number };
 
 /** Por qué un intento no completó el paso. */
 export type AssemblyFailReason =
-  | "wrong-interaction" // el tipo de acción no corresponde al paso (colocar vs gesto)
+  | "wrong-interaction" // el tipo de acción no corresponde al paso (fabricar vs colocar vs gesto)
+  | "wrong-material" // material equivocado al fabricar
   | "wrong-piece" // pieza equivocada
   | "wrong-slot" // slot equivocado
-  | "condition"; // pieza/gesto correctos pero no se cumplió una condición física
+  | "condition"; // material/pieza/gesto correctos pero no se cumplió una condición física
 
 /** Resultado de intentar completar un paso de ensamblaje. */
 export interface AssemblyStepResult {
@@ -46,6 +48,23 @@ export function resolveAssemblyStep(
   const interaction = step.interaction;
   if (!interaction) {
     return { ok: false, reason: "wrong-interaction" };
+  }
+
+  if (interaction.type === "craft") {
+    if (attempt.kind !== "craft") {
+      return { ok: false, reason: "wrong-interaction" };
+    }
+    if (attempt.material !== interaction.material) {
+      return { ok: false, reason: "wrong-material", hint: step.failureHint };
+    }
+    // El esfuerzo del gesto (value) alimenta las condiciones del paso, si las hay.
+    const value = attempt.value ?? 1;
+    const inputs: StepInputs = {};
+    for (const c of step.conditions ?? []) inputs[c.type] = value;
+    const res = resolveStep(step, inputs);
+    return res.ok
+      ? { ok: true, produced: res.produced }
+      : { ok: false, hint: res.hint, reason: "condition" };
   }
 
   if (interaction.type === "place") {

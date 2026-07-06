@@ -19,6 +19,8 @@ export interface AssemblyFeedback {
 export interface AssemblyState {
   /** Índice del paso activo (== steps.length cuando el invento está terminado). */
   stepIndex: number;
+  /** Piezas ya fabricadas (de pasos 'craft'), disponibles para el ensamblaje. */
+  crafted: string[];
   /** Slots ya colocados, para dibujar la escena. */
   filledSlots: string[];
   /** Elementos producidos, en orden (taladro_arco, brasa, fuego…). */
@@ -34,12 +36,14 @@ export type AssemblyAction =
   | { type: "reset" };
 
 export function initAssembly(): AssemblyState {
-  return { stepIndex: 0, filledSlots: [], produced: [], done: false, feedback: null };
+  return { stepIndex: 0, crafted: [], filledSlots: [], produced: [], done: false, feedback: null };
 }
 
 function errorText(reason: AssemblyFailReason | undefined, hint?: string): string {
   if (hint) return hint;
   switch (reason) {
+    case "wrong-material":
+      return "Ese material no va para esta pieza.";
     case "wrong-piece":
       return "Esa pieza no va en este paso.";
     case "wrong-slot":
@@ -74,6 +78,10 @@ export function makeAssemblyReducer(process: Process) {
           return { ...state, feedback: { kind: "error", text: errorText(res.reason, res.hint) } };
         }
 
+        const crafted =
+          step.interaction?.type === "craft"
+            ? [...state.crafted, step.interaction.piece]
+            : state.crafted;
         const filledSlots =
           step.interaction?.type === "place"
             ? [...state.filledSlots, step.interaction.slot]
@@ -84,6 +92,7 @@ export function makeAssemblyReducer(process: Process) {
 
         return {
           stepIndex: nextIndex,
+          crafted,
           filledSlots,
           produced,
           done,

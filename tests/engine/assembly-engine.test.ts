@@ -38,6 +38,16 @@ const enrollarStep: ProcessStep = {
   failureHint: "",
 };
 
+const craftStep: ProcessStep = {
+  id: "tallar_x",
+  action: "tallar",
+  description: "",
+  instruction: "Tallá X",
+  interaction: { type: "craft", piece: "pieza_x", material: "madera_x", gesture: "tallar" },
+  conditions: [],
+  failureHint: "material equivocado",
+};
+
 describe("resolveAssemblyStep — pasos 'place'", () => {
   it("completa el paso al colocar la pieza correcta en el slot correcto", () => {
     const r = resolveAssemblyStep(placeStep, { kind: "place", piece: "pieza_a", slot: "slot_1" });
@@ -84,6 +94,26 @@ describe("resolveAssemblyStep — pasos 'gesture'", () => {
   });
 });
 
+describe("resolveAssemblyStep — pasos 'craft' (fabricar pieza)", () => {
+  it("fabrica la pieza con el material correcto", () => {
+    const r = resolveAssemblyStep(craftStep, { kind: "craft", material: "madera_x" });
+    expect(r.ok).toBe(true);
+  });
+
+  it("rechaza el material equivocado (wrong-material) con hint", () => {
+    const r = resolveAssemblyStep(craftStep, { kind: "craft", material: "piedra_x" });
+    expect(r.ok).toBe(false);
+    expect(r.reason).toBe("wrong-material");
+    expect(r.hint).toBe("material equivocado");
+  });
+
+  it("rechaza un place sobre un paso que espera fabricar", () => {
+    const r = resolveAssemblyStep(craftStep, { kind: "place", piece: "x", slot: "y" });
+    expect(r.ok).toBe(false);
+    expect(r.reason).toBe("wrong-interaction");
+  });
+});
+
 describe("resolveAssemblyStep — integración con el Fuego real", () => {
   const fuego = processesById["fuego"];
   const step = (id: string) => {
@@ -91,6 +121,14 @@ describe("resolveAssemblyStep — integración con el Fuego real", () => {
     if (!s) throw new Error(`paso no encontrado: ${id}`);
     return s;
   };
+
+  it("fabricar la tabla desde madera funciona; desde otro material, no", () => {
+    const ok = resolveAssemblyStep(step("tallar_tabla"), { kind: "craft", material: "rama_seca" });
+    expect(ok.ok).toBe(true);
+    const bad = resolveAssemblyStep(step("tallar_tabla"), { kind: "craft", material: "piedra" });
+    expect(bad.ok).toBe(false);
+    expect(bad.reason).toBe("wrong-material");
+  });
 
   it("colocar la tabla en la base funciona; la pieza equivocada no", () => {
     const ok = resolveAssemblyStep(step("colocar_tabla"), { kind: "place", piece: "tabla_fuego", slot: "base" });
