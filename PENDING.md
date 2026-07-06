@@ -24,6 +24,7 @@
   - **Light mode → toggle:** hoy forzamos light (variante `dark:` neutralizada pero las clases siguen en el código). Cuando se quiera, reactivar un toggle claro/oscuro es trivial.
   - **Animaciones de acciones (juice + humor):** al ejecutar una acción, animarla visualmente (soplar, torcer, friccionar, tallar *sobre* el material). Las que no aplican, con humor (torcer una piedra 😄). El motor ya distingue éxito / no-aplica / falla → es enganchar la animación al resultado. Va junto con los assets visuales.
   - **Pulir la Mesa de Trabajo (jul 2026):** ya existe y es jugable con arte "funcional" portado del prototipo (piezas SVG dibujadas, gestos in-situ animados). La sesión de diseño la lleva al siguiente nivel: proporciones, texturas, paleta e identidad *Dr. Stone*. El usuario: *"se ve mejor, pero creo que diseño lo hará mucho mejor"*. Archivos: `src/components/mesa/`.
+    - **Fase de FABRICACIÓN sin arte (pendiente, el usuario la difirió a arte):** durante tallar/torcer/picar, los materiales son **emoji** (🪵🌿🪨) y la pieza **NO se ve formarse** — a diferencia del ensamblaje, que sí dibuja el taladro en SVG. Falta: SVG de materiales, **animación de tallado**, y mostrar la pieza fabricándose en la zona de trabajo. El modelo ya soporta `Piece.art`, así que es sumar assets, no rehacer. *(Y opcional: fabricar con un gesto físico —frotar para tallar— en vez de solo arrastrar el material a la zona.)*
 
 ## 📦 Scope diferido (confirmado fuera del MVP actual)
 
