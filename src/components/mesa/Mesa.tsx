@@ -220,7 +220,10 @@ export function Mesa({ process }: { process: Process }) {
                 {process.mission?.goal ?? process.name}
               </h1>
             </div>
-            <span className="shrink-0 rounded-full bg-stone-200 px-3 py-1 font-mono text-xs text-stone-600">
+            <span
+              data-testid="progress"
+              className="shrink-0 rounded-full bg-stone-200 px-3 py-1 font-mono text-xs text-stone-600"
+            >
               {Math.min(state.stepIndex, process.steps.length)} / {process.steps.length}
             </span>
           </header>
@@ -247,6 +250,7 @@ export function Mesa({ process }: { process: Process }) {
             {activeCraft ? (
               <div
                 ref={dropRef}
+                data-testid="craft-zone"
                 className="absolute flex h-20 w-24 -translate-x-1/2 -translate-y-1/2 animate-pulse flex-col items-center justify-center rounded-xl border-2 border-dashed border-amber-500 bg-amber-400/15 font-mono text-[10px] uppercase text-amber-700"
                 style={pct(CRAFT_ZONE.x, CRAFT_ZONE.y)}
               >
@@ -256,6 +260,7 @@ export function Mesa({ process }: { process: Process }) {
             ) : activePlace ? (
               <div
                 ref={dropRef}
+                data-testid="assembly-slot"
                 className="absolute flex h-16 w-20 -translate-x-1/2 -translate-y-1/2 animate-pulse items-center justify-center rounded-xl border-2 border-dashed border-lime-500 bg-lime-400/20 font-mono text-[10px] uppercase text-lime-700"
                 style={slotPos(activePlace.slot)}
               >
@@ -266,6 +271,7 @@ export function Mesa({ process }: { process: Process }) {
             {/* capa de gesto IN SITU */}
             {isGesture && (
               <div
+                data-testid="gesture-layer"
                 className="absolute inset-0 z-10 select-none"
                 style={{ touchAction: "none", cursor: gestureKind === "rub" ? "ew-resize" : "pointer" }}
                 onPointerDown={
