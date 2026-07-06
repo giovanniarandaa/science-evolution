@@ -31,7 +31,14 @@ Plan completo en `tasks/plan.md`. Implementar con `/g-build` (un task por vez, e
 - [x] ✅ **Checkpoint Mesa jugable** — armar el taladro y encender el fuego en la Mesa, end-to-end ✅
 
 ## Phase 3 — Ciencia, misión y pulido
-- [ ] **RT8** · Panel científico por paso + zoom molecular · _M_
+- [x] **RT8** · Panel científico + zoom molecular · _M_ ✅
+
+## Fase R2 — Fabricación de piezas (paso atrás por rigor, jul 2026)
+> Feedback del usuario: las piezas (tabla, husillo, arco…) son **compuestos**, no aparecen de la nada. Modelo de 2 capas: **materiales** (recolectás) → **piezas** (fabricás) → **ensamblaje**. El usuario eligió "fabricar cada pieza (máx. rigor)".
+- [ ] **RC1** · Tipos: interacción `craft` (material+gesto→pieza), gestos tallar/picar, `Piece.science` · _S_ ⏳
+- [ ] **RC2** · Contenido: fuego con 5 pasos de fabricación + piezas como compuestos con ciencia · _M_
+- [ ] **RC3** · Motor + reducer: resolver `craft` + estado de piezas fabricadas · _M_
+- [ ] **RC4** · Mesa: fase de fabricación (material→gesto→pieza) + panel "?" con relación pieza↔material · _M/L_
 - [ ] ✅ **Checkpoint Contenido completo** — Success Criteria del SPEC §9; review
 
 ## Phase 4 — Verificación y deploy

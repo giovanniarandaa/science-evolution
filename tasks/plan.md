@@ -27,9 +27,15 @@
 | RT5 | Gestos IN-SITU en la escena (friccionar arrastrando, soplar, enrollar) + animación | ✅ |
 | RT6 | Assets SVG de las piezas del Fuego (escena + thumbnails) | ✅ |
 | RT7 | Integrar store + quitar React Flow | ✅ |
-| RT8 | Panel científico por paso + zoom molecular | ⏳ próximo |
+| RT8 | Panel científico + zoom molecular | ✅ |
+| RC1 | Tipos: interacción `craft` + gestos tallar/picar + `Piece.science` | ⏳ próximo |
+| RC2 | Contenido: fuego con fabricación de piezas (compuestos con ciencia) | |
+| RC3 | Motor + reducer: resolver `craft` + estado de piezas fabricadas | |
+| RC4 | Mesa: fase de fabricación + panel "?" con relación pieza↔material | |
 | RT9 | E2E Playwright del ensamblaje | |
 | RT10 | Deploy Vercel (preview) | |
+
+**Fase R2 (fabricación de piezas):** paso atrás por rigor — las piezas son compuestos que se fabrican desde materiales, no aparecen hechas. Ver `todo.md` §Fase R2.
 
 El plan original (T1-T12) queda abajo como **referencia histórica**: T1-T8 ya ejecutadas; T6-T12 quedan supersedidas por las RT.
 
