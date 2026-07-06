@@ -32,8 +32,8 @@
 | RC2 | Contenido: fuego con fabricación de piezas (compuestos con ciencia) | ✅ |
 | RC3 | Motor + reducer: resolver `craft` + estado de piezas fabricadas | ✅ |
 | RC4 | Mesa: fase de fabricación + panel "?" con relación pieza↔material | ✅ |
-| RT9 | E2E Playwright del ensamblaje | ⏳ próximo |
-| RT10 | Deploy Vercel (preview) | |
+| RT9 | E2E Playwright del ensamblaje | ✅ |
+| RT10 | Deploy Vercel (preview) | ⏳ próximo |
 
 **Fase R2 (fabricación de piezas):** paso atrás por rigor — las piezas son compuestos que se fabrican desde materiales, no aparecen hechas. Ver `todo.md` §Fase R2.
 
