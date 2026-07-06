@@ -2,6 +2,37 @@
 
 > Fuente: `SPEC.md` (aprobado). Visión: `IDEA.md`. Este plan cubre la fundación del proyecto + el primer invento (Fuego). Modo read-only: NO se escribe código hasta `/g-build`.
 
+---
+
+## ⚡ REPLANTEO — la Mesa de Trabajo (jul 2026)
+
+> **Pivote de mecánica** (ver `IDEA.md` §Pilar 1 y `PENDING.md` §DECISIÓN CLAVE). Se **descartó el canvas de nodos (React Flow)** como interacción central: se prototiparon 6 modelos y el usuario eligió la **Mesa de Trabajo** — arrastrás piezas reales y la herramienta se ensambla paso a paso (SVG + gestos físicos). *"JAJAJA me encanta, esto es lo que busco."*
+
+**Qué se conserva:** T1-T5 (motor de lógica, store, contenido base) — agnóstico de UI. **Qué se reemplaza:** T6-T8 (canvas de nodos) → la Mesa. **Qué se replantea:** modelo de datos (sub-pasos de ensamblaje) y el rigor del Fuego (piedra = cojinete, no se consume).
+
+**Decisiones nuevas:**
+- **Sin motor de juego externo** (Phaser/Pixi/Godot): React + SVG + animación alcanza. (Pixi/Phaser sólo se evaluaría para el mundo del Pilar 2.) El motor de lógica (`src/game/engine`) se conserva.
+- **3 capas:** lógica genérica (motor) · contenido declarativo por-invento (pasos + piezas + escena) · componente `<Mesa>` genérico.
+- **Guiado primero**, con el modelo preparado para orden libre después.
+- **Fricción = gesto de frotar** (velocidad real del gesto), reemplaza "mantener presionado".
+
+### Task list replanteada
+
+| # | Task | Estado |
+|---|------|--------|
+| RT1 | Modelo de datos de la Mesa (`Piece`, `StepInteraction`, `ProcessStep`+, `AssemblyScene`) + tests | ✅ |
+| RT2 | Reescribir contenido del Fuego (~8 pasos + piezas + fix rigor piedra=cojinete) + tests | ⏳ próximo |
+| RT3 | Extender el motor para pasos de ensamblaje (place correcto / gesto con umbral) + tests | |
+| RT4 | Componente `<Mesa>` genérico (bandeja + slots + drag + panel de pasos) — portar prototipo a React/TS | |
+| RT5 | Gestos animados en SVG (fricción + soplar) | |
+| RT6 | Assets SVG de las piezas del Fuego (portar del prototipo) | |
+| RT7 | Integrar store + quitar React Flow | |
+| RT8 | Panel científico por paso + zoom molecular | |
+| RT9 | E2E Playwright del ensamblaje | |
+| RT10 | Deploy Vercel (preview) | |
+
+El plan original (T1-T12) queda abajo como **referencia histórica**: T1-T8 ya ejecutadas; T6-T12 quedan supersedidas por las RT.
+
 ## Overview
 
 Levantar el esqueleto de *Kingdom of Science* (Next.js + React Flow + Zustand + Tailwind, client-side, sin backend) y construir el primer invento **Fuego** como un proceso paso a paso (taladro de arco) con condiciones que fallan, panel científico, zoom molecular, misión y persistencia local. El motor es genérico y data-driven: inventos futuros se agregan como contenido en `src/content/`, sin tocar `src/game/`.
@@ -12,8 +43,8 @@ Levantar el esqueleto de *Kingdom of Science* (Next.js + React Flow + Zustand + 
 - **Data-driven.** Lógica genérica en `src/game/`; contenido (elementos, procesos, ciencia) en `src/content/`. *Rationale: escalar a "proyecto muy grande" sin reescribir el motor.*
 - **App Router con `app/` en raíz + `src/` para el resto** (game/content/components/lib). React Flow y el canvas se montan como Client Components (`"use client"`). *Rationale: matchea la estructura del SPEC y evita problemas de SSR/hidratación con React Flow.*
 - **pnpm** como gestor de paquetes.
-- **UX de la fricción (MVP):** "mantener presionado con barra de progreso" — la interacción más simple que transmite esfuerzo/velocidad. Iterable después.
-- **Canvas libre estilo n8n** con snapping y validación de conexiones (no slots rígidos).
+- ~~**UX de la fricción (MVP):** "mantener presionado con barra de progreso".~~ → **Supersedido (jul 2026):** gesto de frotar el arco (velocidad real). Ver REPLANTEO arriba.
+- ~~**Canvas libre estilo n8n** con snapping y validación de conexiones.~~ → **Supersedido (jul 2026):** Mesa de Trabajo con slots y ensamblaje paso a paso; React Flow descartado.
 
 ## Grafo de dependencias
 

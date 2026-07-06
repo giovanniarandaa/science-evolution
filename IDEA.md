@@ -28,17 +28,20 @@ No es *"¡felicidades, descubriste el fuego!"* — es aprender **cómo** hacer f
 
 *Estrella polar (lejana):* construir un CPU o un monitor será su propia mini-simulación de proceso — "simular ser una máquina", cada capa fabricada paso a paso. Es el norte, no el MVP.
 
+**Cómo se juega esto — la Mesa de Trabajo *(mecánica validada, jul 2026)*:** cada invento se arma en una **mesa de trabajo** donde arrastrás las **piezas reales** (la rama, la cuerda, la piedra, el husillo…) y la herramienta **se ensambla ante tus ojos, paso a paso** (~5-10 instrucciones reales). Los gestos son **físicos**: frotás el arco de lado a lado para generar fricción → brasa → soplás → fuego. **NO son nodos abstractos ni botones mágicos.** Validado con prototipos jugables (ver `PENDING.md`).
+
 ---
 
 ## Los dos pilares
 
-### Pilar 1 — El Grafo del Conocimiento *(mecánica core)*
+### Pilar 1 — El Conocimiento: la Mesa de Trabajo *(mecánica core)*
 
-Un **"n8n de la ciencia"**: un canvas de nodos donde construís cadenas de dependencia tecnológica.
+> **Pivote de diseño (validado jul 2026):** el paradigma **"n8n / canvas de nodos-y-cables" queda descartado como interacción central** — se prototipó y no encaja con la visión. La mecánica de armado es la **Mesa de Trabajo**. El "grafo" sobrevive, si acaso, como *vista macro de progreso* (a reevaluar: mapa dibujado estilo Dr. Stone vs. grafo de nodos).
 
-1. **El Grafo Vivo.** Nodos = materiales/elementos; aristas = acciones/procesos. Ej: `madera → [frotar] → fuego`, y ese `fuego` alimenta `arcilla → [calentar] → cerámica`. **El grafo que construís ES tu árbol de conocimiento, y crece visualmente.** Ves *toda la cadena*, no solo el resultado.
-2. **Zoom Molecular *(el rigor)*.** Cada nodo tiene dos niveles: **macro** (agua) y **micro** (zoom → H₂O: dos hidrógenos + un oxígeno; fuego → oxidación exotérmica). Cumple el objetivo central: enseñar *qué ES* y *cómo se compone* cada cosa.
-3. **Misiones de Senku *(dirección)*.** Un mentor da objetivos con historia ("la aldea está enferma → fabricá la sulfa") que guían por el árbol sin quitar la libertad de explorar.
+1. **La Mesa de Trabajo *(el corazón, validado)*.** Entrás a un invento y estás en una mesa: arrastrás las **piezas reales** (rama, cuerda, piedra, husillo…) y la herramienta **se ensambla ante tus ojos, paso a paso** (~5-10 instrucciones reales), con **gestos físicos** (frotás el arco → fricción → brasa → soplás → fuego) y condiciones que se pueden *fallar*. **NO nodos abstractos ni botones.** Es "el proceso ES el juego" hecho literal. → prototipos jugables en `PENDING.md`.
+2. **El Mapa del Conocimiento *(vista macro)*.** Todo lo que descubriste y qué desbloquea qué (elementos llave). Formato a definir (mapa/mundo dibujado vs. grafo).
+3. **Zoom Molecular *(el rigor)*.** Cada elemento tiene dos niveles: **macro** (agua) y **micro** (zoom → H₂O: dos hidrógenos + un oxígeno; fuego → oxidación exotérmica). Cumple el objetivo central: enseñar *qué ES* y *cómo se compone* cada cosa.
+4. **Misiones de Senku *(dirección)*.** Un mentor da objetivos con historia ("la aldea está enferma → fabricá la sulfa") que guían sin quitar la libertad de explorar.
 
 **Elementos llave (gating):** ciertos nodos son cuellos de botella que **desbloquean ramas enteras**. Ej. real de Dr. Stone: quemar **conchas → cal**, y la cal abre vidrio + jabón + procesado. El momento *"¡ahora se abrió todo!"* es la adicción sana del juego.
 
@@ -79,7 +82,7 @@ El sistema profundo de colonia (rasgos completos, cadenas de equipo, muchos biom
 - [ ] **La gente lee el contenido científico** (no solo clickea para avanzar). → Observar si abren el panel "qué es esto" y el zoom molecular.
 - [ ] **La capa de gestión NO diluye el aprendizaje.** → Confirmar que esperar/asignar humanos *motiva* inventar y no se vuelve un idle-clicker vacío.
 - [ ] **El rigor y la diversión conviven.** → ¿Las reacciones reales se sienten "mágicas" o se sienten tarea?
-- [ ] **React Flow (o similar) aguanta la mecánica** sin volverse un editor de diagramas frío. → Spike técnico: nodos custom + animación de desbloqueo.
+- [x] **La mecánica de armado se siente satisfactoria y no fría.** → ✅ Validado (jul 2026) con el prototipo de **Mesa de Trabajo**: ensamblaje físico paso a paso + gesto de fricción. Reemplaza el enfoque React Flow / nodos, que se descartó.
 
 ---
 
@@ -88,7 +91,7 @@ El sistema profundo de colonia (rasgos completos, cadenas de equipo, muchos biom
 Un slice temático completo y jugable de principio a fin, con foco en **profundidad de proceso, no cantidad de nodos**.
 
 **Pilar 1 (core del MVP) — 3-4 "inventos-proceso" completos:**
-- Canvas de nodos interactivo (drag & drop, conectar con acciones).
+- **Mesa(s) de trabajo** interactivas (arrastrar piezas reales, ensamblaje paso a paso con gestos físicos).
 - **~15-20 elementos/materiales base** y **~5-8 acciones** (frotar, calentar, amasar, moler, secar, cocer) — al servicio de los procesos.
 - **3-4 inventos autorados como procedimiento paso a paso**, cada uno con condiciones reales que se pueden *fallar*:
   1. **Hacer y controlar el fuego** (no un trofeo: alimentarlo, subir la temperatura).
@@ -165,7 +168,7 @@ Proyecto de largo aliento, construido **invento por invento** a lo largo de much
 ## Open Questions
 
 - **✅ Decidido:** Pilar 2 en el MVP = *semilla mínima* (2-3 humanos, 2 zonas, 1 herramienta).
-- **¿Cómo se representa un "proceso paso a paso" en la UI?** ¿Un sub-grafo dentro del nodo, una secuencia de pasos con condiciones (temperatura, secado, proporción), un mini-panel? ← clave para el spec.
+- **✅ Decidido (jul 2026):** un "proceso paso a paso" se representa como la **Mesa de Trabajo** — arrastrás piezas reales y la herramienta se ensambla en ~5-10 pasos con gestos físicos. (Ver Pilar 1 y prototipos en `PENDING.md`.)
 - **Stack técnico:** ¿React + React Flow (@xyflow) + Next.js? → se define en `/g-spec`.
 - **Formato del contenido:** elementos, recetas, zonas y humanos data-driven en JSON (recomendado, para escalar sin tocar código).
 - **Loop de tiempo:** ¿el "1 humano por día" es tiempo real, por turnos, o por acciones completadas?
