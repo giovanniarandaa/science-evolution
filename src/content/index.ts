@@ -13,3 +13,16 @@ export const elementsById: Record<string, Element> = Object.fromEntries(
 export const processesById: Record<string, Process> = Object.fromEntries(
   processes.map((p) => [p.id, p]),
 );
+
+/** Ids producidos por algún proceso (intermedios y productos finales). */
+const producedIds = new Set<string>();
+for (const p of processes) {
+  producedIds.add(p.produces);
+  for (const s of p.steps) {
+    if (s.produces) producedIds.add(s.produces);
+  }
+}
+
+/** Elementos base: materia prima que ningún proceso produce (recolectable). */
+export const baseElements: Element[] = elements.filter((e) => !producedIds.has(e.id));
+export const baseElementIds: string[] = baseElements.map((e) => e.id);

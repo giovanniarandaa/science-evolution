@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { elements, processes, processesById } from "@/content";
+import { baseElementIds, processesById } from "@/content";
 import { runProcess, type ProcessResult, type StepInputs } from "@/game/engine";
 
 /**
@@ -8,24 +8,10 @@ import { runProcess, type ProcessResult, type StepInputs } from "@/game/engine";
  * Single-player, client-side: sin backend (ver SPEC §2).
  */
 
-/** Elementos base: los que ningún proceso produce (materia prima recolectable). */
-function computeBaseElementIds(): string[] {
-  const produced = new Set<string>();
-  for (const p of processes) {
-    produced.add(p.produces);
-    for (const s of p.steps) {
-      if (s.produces) produced.add(s.produces);
-    }
-  }
-  return elements.map((e) => e.id).filter((id) => !produced.has(id));
-}
-
-const BASE_ELEMENT_IDS = computeBaseElementIds();
-
 /** Progreso inicial fresco (copias nuevas para no compartir referencias). */
 function freshProgress() {
   return {
-    discovered: [...BASE_ELEMENT_IDS],
+    discovered: [...baseElementIds],
     completedProcesses: [] as string[],
     completedMissions: [] as string[],
   };
