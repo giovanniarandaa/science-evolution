@@ -63,4 +63,19 @@ describe("game store", () => {
     expect(s.completedProcesses).toContain("fuego");
     expect(s.completedMissions).toContain("m_fuego");
   });
+
+  it("discover agrega el elemento y completa el proceso+misión si es su producto final", () => {
+    useGameStore.getState().discover("cuerda");
+    const s = useGameStore.getState();
+    expect(s.discovered).toContain("cuerda");
+    expect(s.completedProcesses).toContain("cordeleria");
+    expect(s.completedMissions).toContain("m_cuerda");
+  });
+
+  it("discover de un intermedio no completa ningún proceso", () => {
+    useGameStore.getState().discover("taladro_arco");
+    const s = useGameStore.getState();
+    expect(s.discovered).toContain("taladro_arco");
+    expect(s.completedProcesses).not.toContain("fuego");
+  });
 });

@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { baseElementIds, processesById } from "@/content";
+import { baseElementIds, processes, processesById } from "@/content";
 import { runProcess, type ProcessResult, type StepInputs } from "@/game/engine";
 
 /**
@@ -29,6 +29,8 @@ export interface GameState {
     processId: string,
     inputsByStep?: Record<string, StepInputs>,
   ) => ProcessResult;
+  /** Registra un elemento descubierto (por un paso); completa el proceso y su misión si es su producto final. */
+  discover: (elementId: string) => void;
   /** Reinicia el juego al estado inicial. */
   reset: () => void;
 }
@@ -58,6 +60,20 @@ export const useGameStore = create<GameState>()(
           });
         }
         return result;
+      },
+
+      discover: (elementId) => {
+        const state = get();
+        const proc = processes.find((p) => p.produces === elementId);
+        set({
+          discovered: addOnce(state.discovered, elementId),
+          completedProcesses: proc
+            ? addOnce(state.completedProcesses, proc.id)
+            : state.completedProcesses,
+          completedMissions: proc?.mission
+            ? addOnce(state.completedMissions, proc.mission.id)
+            : state.completedMissions,
+        });
       },
 
       reset: () => set(freshProgress()),
