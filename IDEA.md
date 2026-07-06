@@ -119,6 +119,7 @@ Un slice temático completo y jugable de principio a fin, con foco en **profundi
 - 🐾 **Reino animal:** domesticación, ganadería, seda, tracción animal.
 - 🌱 **Química avanzada:** ácidos/bases, tabla periódica interactiva, ácido sulfúrico + máscara.
 - ⚙️ **Física / mecánica:** fuerzas, palancas, **poleas y engranajes** — energía y movimiento. Base de la automatización.
+- 💧 **Rueda hidráulica + engranajes — HITO ÉPICO:** una rueda movida por la corriente de agua transmite fuerza mecánica que **automatiza el trabajo pesado** (moler, martillar, mover fuelles) sin esfuerzo humano; y más adelante, acoplada a imanes/bobina, **genera electricidad**. El salto de "todo a mano" a la energía mecánica → eléctrica. Puro Dr. Stone. 🔥
 - ➗ **Matemáticas:** herramienta transversal (medir, proporciones, geometría) que habilita ingeniería y ciencia precisa.
 
 **Sistema de reino (Pilar 2 completo):**
