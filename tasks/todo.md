@@ -13,8 +13,8 @@ Plan completo en `tasks/plan.md`. Implementar con `/g-build` (un task por vez, e
 ## Phase 2 — Slice jugable (canvas)
 - [x] **T6** · Canvas base React Flow + paleta de elementos arrastrables · _M_ ✅ `d18b1c6`
 - [x] **T7** · Nodo custom + acción que dispara un paso (torcer → cuerda, tallar → taladro) · _M_ ✅
-- [ ] **T8** · Interacciones friccionar (→brasa) y soplar (→fuego) + manejo de falla · _M_
-- [ ] ✅ **Checkpoint Slice jugable** — encender fuego end-to-end + camino de falla; review
+- [x] **T8** · Interacciones friccionar (→brasa) y soplar (→fuego) + manejo de falla · _M_ ✅ `bece518`
+- [x] ✅ **Checkpoint Slice jugable** — encender fuego end-to-end + camino de falla; **review ⇦ ACÁ**
 
 ## Phase 3 — Ciencia, misión y pulido
 - [ ] **T9** · Panel científico + zoom molecular · _M_
