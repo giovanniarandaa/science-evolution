@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔥 Kingdom of Science
 
-## Getting Started
+> Un juego web donde **reconstruís la civilización desde cero** redescubriendo la ciencia, al estilo *Dr. Stone*. Cada invento se **construye paso a paso** —con condiciones físicas reales que se pueden fallar— y te enseña **de qué se compone el mundo**. De frotar dos ramas para hacer fuego… hasta el futuro.
 
-First, run the development server:
+## La idea
+
+El principio central es **"el proceso ES el juego"**: nada de *"¡felicidades, descubriste el fuego!"*. Cada invento es un **procedimiento real** que armás en una **Mesa de Trabajo**:
+
+1. **Recolectás** materiales (madera, fibra, piedra…).
+2. **Fabricás** las piezas desde esos materiales (tallás la tabla, torcés la cuerda, picás el cojinete…).
+3. **Ensamblás** la herramienta pieza por pieza.
+4. **La usás** con gestos físicos (frotás para generar fricción, soplás para dar oxígeno).
+
+Y en cada paso podés abrir la **ciencia real** de lo que tenés en la mano: qué es, cómo se compone, su molécula, con fuentes citadas.
+
+👉 Visión completa y roadmap: [`IDEA.md`](./IDEA.md) · Pendientes y decisiones: [`PENDING.md`](./PENDING.md)
+
+## Estado
+
+**Invento #1 — El Fuego (taladro de arco): completo y jugable.** Se juega de 0 a 🔥 (fabricar → ensamblar → friccionar → soplar), con panel científico y zoom molecular. Verificado con tests unitarios + E2E y desplegado en Vercel.
+
+## Stack
+
+- **Next.js 16** (App Router) + **React 19** + **TypeScript**
+- **Zustand** (estado + persistencia en `localStorage`)
+- **Tailwind CSS 4** + **SVG** para la Mesa (sin motor de juego externo)
+- **Vitest** + Testing Library (unit) · **Playwright** (E2E)
+- Client-side puro, sin backend. Deploy en **Vercel**.
+
+## Cómo correr
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Otros comandos:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm test         # tests unitarios (Vitest)
+pnpm test:e2e     # tests end-to-end (Playwright)
+pnpm typecheck    # tsc --noEmit
+pnpm build        # build de producción
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Arquitectura (data-driven)
 
-## Learn More
+La lógica es genérica; el contenido son datos. **Agregar un invento = agregar datos + assets, no reescribir el motor.**
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+  game/           # LÓGICA genérica (agnóstica de la UI)
+    types/        #   modelo de dominio (Element, Process, Piece, StepInteraction…)
+    engine/       #   motor de procesos y de ensamblaje (funciones puras)
+    store/        #   estado del juego (Zustand + persist)
+  content/        # CONTENIDO (el "árbol de la ciencia")
+    elements/     #   materiales y productos
+    processes/    #   los inventos, paso a paso
+    science/      #   fichas científicas y moléculas
+  components/
+    mesa/         # PRESENTACIÓN: la Mesa de Trabajo (genérica) + escenas por-invento
+app/              # rutas (App Router)
+e2e/              # tests Playwright
+tests/            # tests unitarios
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Cómo se construye
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Proyecto de largo aliento, **invento por invento**. Reglas del juego:
 
-## Deploy on Vercel
+- **Investigación primero (innegociable):** antes de construir un invento se investiga cómo se hace *de verdad* (con fuentes). El rigor manda.
+- **Dispuestos a dar pasos atrás:** si "así no se hace tal invento", se corrige aunque implique rehacer.
+- **TDD:** test en rojo → implementación en verde → un commit por task.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Inspirado en Dr. Stone. Hecho con rigor, paso a paso.* 🧪
