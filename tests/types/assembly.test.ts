@@ -40,6 +40,35 @@ describe("modelo de la Mesa de Trabajo", () => {
     }
   });
 
+  it("modela una interacción 'craft' (fabricar una pieza desde un material)", () => {
+    const craft: StepInteraction = {
+      type: "craft",
+      piece: "tabla_fuego",
+      material: "rama_seca",
+      gesture: "tallar",
+    };
+    expect(craft.type).toBe("craft");
+    if (craft.type === "craft") {
+      expect(craft.piece).toBe("tabla_fuego");
+      expect(craft.material).toBe("rama_seca");
+      expect(craft.gesture).toBe("tallar");
+    }
+  });
+
+  it("una Pieza puede declarar su ciencia propia (es un compuesto, no un material)", () => {
+    const tabla: Piece = {
+      id: "tabla_fuego",
+      name: "Tabla de fuego",
+      fromElement: "rama_seca",
+      art: "tabla_fuego",
+      science: {
+        whatIsIt: "Tabla plana de madera blanda con una muesca en V.",
+        composition: "Madera seca (celulosa) tallada; base donde la fricción arranca el polvo.",
+      },
+    };
+    expect(tabla.science?.whatIsIt).toMatch(/tabla/i);
+  });
+
   it("un ProcessStep admite instrucción, nota e interacción de ensamblaje", () => {
     const step: ProcessStep = {
       id: "colocar_tabla",
