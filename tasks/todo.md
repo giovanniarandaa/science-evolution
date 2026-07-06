@@ -23,8 +23,8 @@ Plan completo en `tasks/plan.md`. Implementar con `/g-build` (un task por vez, e
 > Ver `tasks/plan.md` §REPLANTEO, `IDEA.md` §Pilar 1 y `PENDING.md` §DECISIÓN CLAVE.
 - [x] **RT1** · Modelo de datos de la Mesa (`Piece`, `StepInteraction`, `ProcessStep`+, `AssemblyScene`) + tests · _S_ ✅
 - [x] **RT2** · Reescribir contenido del Fuego (8 pasos + piezas + fix rigor piedra=cojinete) + tests · _M_ ✅
-- [ ] **RT3** · Extender el motor para pasos de ensamblaje (place correcto / gesto con umbral) + tests · _M_ ⏳
-- [ ] **RT4** · Componente `<Mesa>` genérico (bandeja + slots + drag + panel de pasos) · _M/L_
+- [x] **RT3** · Extender el motor para pasos de ensamblaje (place correcto / gesto con umbral) + tests · _M_ ✅
+- [ ] **RT4** · Componente `<Mesa>` genérico (bandeja + slots + drag + panel de pasos) · _M/L_ ⏳
 - [ ] **RT5** · Gestos animados en SVG (fricción + soplar) · _M_
 - [ ] **RT6** · Assets SVG de las piezas del Fuego (portar del prototipo) · _M_
 - [ ] **RT7** · Integrar store + quitar React Flow · _S/M_
